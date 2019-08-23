@@ -65,4 +65,43 @@ source1 source2 ...sourceN``
 
 **项目依赖的软件包，都会自动成为``catkin``的组件**
 
-以``catkin_prefix``的形式创建一组环境变量，这意味着nodelet导出的头文件路径、库等都会附加到``catkin_variables``上，例如``catkin_INCLUDE_DIRS``不仅包含catkin的头文件路径，也包含了nodelet的头文件路径.
+以``catkin_prefix``的形式创建一组环境变量，这意味着nodelet导出的头文件路径、库等都会附加到``catkin_variables``上，例如``catkin_INCLUDE_DIRS``不仅包含catkin的头文件路径，也包含了nodelet的头文件路径.``catkin_LIBRARIES``
+
+**WHSY EXAMPPLE:**
+
+![catkin_COMPONENT](assets/markdown-img-paste-20190823160044946.png)
+
+**所有的依赖包都会成为catkin的组件，环境变量保存在``catkin_variables``中,在后面的脚本中可以直接调动 ``catkin_INCLUDE_DIRS``和``catkin_LIBRARIES``.**
+
+## 5.catkin_package()
+
+``catkin_package()``是一个由catkin提供的CMake宏,需要指定特定的catkin信息到编译系统，而这些信息又会被用于生成pkg-config和CMake文件。
+
+``catkin_package parameters:``
+
+``INCLUDE_DIRS:``软件包导出的头文件路径；
+
+``LIBRARIES：``项目导出的库；
+
+``CATKIN_DEPENDS:``当前项目依赖的其他catkin项目；
+
+``DEPENDS：``当前项目依赖的非catkin CMake项目；
+
+**EXAMPPLE:**
+````
+catkin_package( INCLUDE_DIRS include  
+                LIBRARIES ${PROJECT_NAME}   
+                CATKIN_DEPENDS roscpp nodelet   
+                DEPENDS eigen opencv)
+````
+**LINK:** https://zhuanlan.zhihu.com/p/62344573
+
+## 6.使用链接第三方库
+
+``include_directories()``
+
+``link_directories()``
+
+``target_link_libraries()``
+
+**LINK:** https://blog.csdn.net/ly890700/article/details/72808426
