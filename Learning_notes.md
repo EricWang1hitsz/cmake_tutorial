@@ -43,3 +43,26 @@ source1 source2 ...sourceN``
 `include_directories("${PROJECT_SOURCE_DIR}/MathFunctions")`添加`mysqrt.h`头文件路径
 
 `target_link_libraries(${PROJECT_NAME}_node MathFunctions)`将`mysqrt`共享库链接到`tutorial`主函数
+## 4.find_package()
+
+**作用：查找 编译依赖的CMake包**
+
+编译一个项目，需要使用CMake的``find_package``函数确定依赖的其他CMake包并找到它们，一般情况下至少会有一个catkin依赖：
+
+``find_package(catkin_REQUIRED)``
+
+``find_package``具体功能：
+
+如果CMake通过``find_package()``查找到一个软件包，它就会创建若干个CMake环境变量，以提供有关已查找到的软件包的信息。这些环境变量可以在后面的CMake脚本中使用：
+
+``<NAME>_Found:``当库被查找到时置为True，否则为False；
+
+``<NAME>_INCLUDE_DIRS``或``<NAME>_INCLUDE:``软件包导出的头文件路径；
+
+``<NAME>_LIBRARIES``或``<NAME>_LIBS``:软件包导出的库的路径；
+
+### 4.1 find_package(catkin REQUIRED COMPONENT nodelet)
+
+**项目依赖的软件包，都会自动成为``catkin``的组件**
+
+以``catkin_prefix``的形式创建一组环境变量，这意味着nodelet导出的头文件路径、库等都会附加到``catkin_variables``上，例如``catkin_INCLUDE_DIRS``不仅包含catkin的头文件路径，也包含了nodelet的头文件路径.
