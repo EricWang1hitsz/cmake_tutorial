@@ -61,6 +61,12 @@ source1 source2 ...sourceN``
 
 ``<NAME>_LIBRARIES``或``<NAME>_LIBS``:软件包导出的库的路径；
 
+**区别：**
+``<NAME>_INCLUDE_DIRS`` 库头文件路径；
+``<NAME>_LIBRARY_DIRS`` 库链接文件路径；
+``<NAME>_LIBRARIES`` 库路径，用于target_link_libraries;
+
+
 ### 4.1 find_package(catkin REQUIRED COMPONENT nodelet)
 
 **项目依赖的软件包，都会自动成为``catkin``的组件**
